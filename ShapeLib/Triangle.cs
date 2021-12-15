@@ -20,6 +20,12 @@ public class Triangle : IShape
         {
             throw new ArgumentException("Argument must be greater than zero", nameof(side3));
         }
+
+        if (side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1)
+        {
+            throw new ArgumentException("Three sides does not make a triangle");
+        }
+
         _side1 = side1;
         _side2 = side2;
         _side3 = side3;
