@@ -1,4 +1,4 @@
-﻿namespace ShapeLibTests;
+﻿namespace ShapeLib;
 
 public static class Utils
 {

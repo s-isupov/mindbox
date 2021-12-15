@@ -12,10 +12,12 @@ public class Triangle : IShape
         {
             throw new ArgumentException("Argument must be greater than zero", nameof(side1));
         }
+
         if (side2 <= 0)
         {
             throw new ArgumentException("Argument must be greater than zero", nameof(side2));
         }
+
         if (side3 <= 0)
         {
             throw new ArgumentException("Argument must be greater than zero", nameof(side3));
@@ -30,7 +32,17 @@ public class Triangle : IShape
         _side2 = side2;
         _side3 = side3;
     }
-    
+
+    public bool IsRightAngled
+    {
+        get
+        {
+            var sides = new[] { _side1, _side2, _side3 };
+            Array.Sort(sides);
+            return Math.Abs(Math.Pow(sides[2], 2) - (Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2))) < Utils.Tolerance;
+        }
+    }
+
     public double Area
     {
         get

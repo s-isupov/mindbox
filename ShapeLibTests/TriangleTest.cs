@@ -28,7 +28,8 @@ public class TriangleTest
         var side3 = 5;
         var expected = 6;
         var actual = new Triangle(side1, side2, side3).Area;
-        Assert.That(actual, Is.EqualTo(expected).Within(Utils.Tolerance), $"Area should be equal to {expected}, got {actual}");
+        Assert.That(actual, Is.EqualTo(expected).Within(Utils.Tolerance),
+            $"Area should be equal to {expected}, got {actual}");
     }
 
     [TestCase(3, 4, 5, true)]
@@ -46,5 +47,24 @@ public class TriangleTest
 
         Assert.DoesNotThrow(() => new Triangle(side1, side2, side3),
             "Three sides make a triangle. No exception must be thrown");
+    }
+
+    [Test]
+    public void RightAngledTest()
+    {
+        var side1 = 3;
+        var side2 = 4;
+        var side3 = 5;
+        var rightTriangle = new Triangle(side1, side2, side3);
+        Assert.AreEqual(true, rightTriangle.IsRightAngled,
+            $"Triangle with sides {side1}, {side2}, {side3} should be right angled");
+        //Swap sides to check that params order don't affect
+        rightTriangle = new Triangle(side3, side2, side1);
+        Assert.AreEqual(true, rightTriangle.IsRightAngled,
+            $"Triangle with sides {side1}, {side2}, {side3} should be right angled");
+        side1 = 6;
+        var triangle = new Triangle(side1, side2, side3);
+        Assert.AreEqual(false, triangle.IsRightAngled,
+            $"Triangle with sides {side1}, {side2}, {side3} should not be right angled");
     }
 }
